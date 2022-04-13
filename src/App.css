@@ -6,6 +6,10 @@
   align-items: center;
 }
 
+.list{
+  margin-bottom:6px;
+}
+
 .btn{
   padding:6px;
   border:1px solid black;
