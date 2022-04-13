@@ -1,5 +1,38 @@
 .App {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn{
+  padding:6px;
+  border:1px solid black;
+  border-radius: 5px;
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+.upload{
+  background-color: pink;
+}
+
+input{
+  margin-bottom: 6px;
+  border-radius: 6px;
+  padding:6px;
+}
+
+.btn:hover{
+  background-color: orange;
+}
+
+.head{
+  padding:6px;
+  border:1px solid black;
+  border-radius: 5px;
+  margin-bottom: 6px;
 }
 
 .App-logo {
