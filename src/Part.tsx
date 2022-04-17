@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-import logo from './logo.svg';
+import logo from "./logo.svg";
 
-import './App.css';
+import "./App.css";
 
-function Part() {
-
-
-
+function Part(props: any) {
   return (
     <div className="Part">
-    
-      uploaded parts show here
+      {props.name} (Amount: {props.amount})
     </div>
   );
 }

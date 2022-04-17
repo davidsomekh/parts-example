@@ -1,43 +1,39 @@
 import React, { useEffect, useState } from "react";
 
-import logo from './logo.svg';
-import Part from './Part';
+import logo from "./logo.svg";
+import Part from "./Part";
 
-import './App.css';
-
-
+import "./App.css";
 
 function List() {
-
-  const [parts,setParts] = useState([
+  const [parts, setParts] = useState([
     {
       name: "Wheel",
+      id: "wheel",
       amount: 8,
-      file_name: "wheel.sldprt"
+      file_name: "wheel.sldprt",
     },
     {
       name: "Chair",
-      amount:2,
-      file_name: "chair new.sldprt"
+      id: "chair",
+      amount: 2,
+      file_name: "chair new.sldprt",
     },
     {
-      name: "Engine",
+      name: "Engine22",
+      id: "engine",
       amount: 1,
-      file_name: "engine_v1.sldprt"
+      file_name: "engine_v1.sldprt",
     },
   ]);
 
-  const getParts= () => {
-
-    return '<div>g</div>'
-
-   }
-
   return (
     <div className="list">
-      
-      existing parts show here
-      {getParts()}
+      {parts.map((btn) => {
+        return (
+          <Part key={btn.name} amount={btn.amount} name={btn.name}/>
+        );
+      })}
     </div>
   );
 }
