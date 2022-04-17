@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 
-import logo from "./logo.svg";
 
 import "./App.css";
 import {useParts} from './Context/Parts';
@@ -12,7 +11,7 @@ import getID from './Shared/Id';
 function Newpart(props: any) {
 
   const {addParts,getParts} = useParts();
-  const {setErrorMsg,getError} = useError();
+  const {setErrorMsg} = useError();
 
   const [name, setName] = useState("");
   const [amount, setAmount] = useState(1);
@@ -33,7 +32,7 @@ function Newpart(props: any) {
   };
 
   const validate = () => {
-    if (name == "") {
+    if (name === "") {
       setErrorMsg("Please select name");
       return false;
     }
@@ -42,7 +41,7 @@ function Newpart(props: any) {
       return false;
     }
 
-    if (file == '') {
+    if (file === '') {
       setErrorMsg("No file selected!");
       return false;
     }

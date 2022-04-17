@@ -2,7 +2,7 @@ import {useError} from './Context/ErrorContext';
 
 function Error() {
 
-  const {setErrorMsg,getError} = useError();
+  const {getError} = useError();
 
   let t: any;
 
