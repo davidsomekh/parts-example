@@ -8,7 +8,8 @@ function Part(props: any) {
   console.log(props);
   return (
     <div className="Part">
-      {props.name} (Amount: {props.amount}) <b>{props.file}</b>
+      {props.name} (Amount: {props.amount}) <b>{props.file}</b> <i className="fa fa-edit icons"></i>
+
     </div>
   );
 }

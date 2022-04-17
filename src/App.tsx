@@ -59,11 +59,8 @@ function App() {
       {error.length > 0 && <div className="error">{error}</div>}
       <div className="head">Parts</div>
       <List parts={parts} />
-      {parts.length == 0 && "Click below to add new parts!"}
-      <div onClick={showFileAdd} className="btn">
-        + Add New
-      </div>
-
+      {(parts.length == 0 && !newPart)  && "Click below to add new parts!"}
+      {!newPart && <div onClick={showFileAdd} className="btn">+ Add New   </div>}
       {newPart && (
         <Newpart error={showError} close={hideFileAdd} upload={addPart} />
       )}

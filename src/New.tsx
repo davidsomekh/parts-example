@@ -40,6 +40,7 @@ function Newpart(props: any) {
     props.close();
   };
 
+ 
   const handleNameChange = (e: any) => {
     setName(e.target.value);
   };
@@ -75,9 +76,10 @@ function Newpart(props: any) {
       <div>
         <input  onChange={(e) => handleFileChange(e)} type="file" id="myfile" name="myfile"></input>
       </div>
-      <div onClick={onUpload} className="btn upload">
-        Upload
-      </div>
+      <div onClick={onUpload} className="btn upload">  Upload</div>
+      <div onClick={reset} className="btn"> Cancel </div>
+      
+      
     </div>
   );
 }
