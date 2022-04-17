@@ -5,33 +5,13 @@ import Part from "./Part";
 
 import "./App.css";
 
-function List() {
-  const [parts, setParts] = useState([
-    {
-      name: "Wheel",
-      id: "wheel",
-      amount: 8,
-      file_name: "wheel.sldprt",
-    },
-    {
-      name: "Chair",
-      id: "chair",
-      amount: 2,
-      file_name: "chair new.sldprt",
-    },
-    {
-      name: "Engine22",
-      id: "engine",
-      amount: 1,
-      file_name: "engine_v1.sldprt",
-    },
-  ]);
-
+function List(props:any) {
+  
   return (
     <div className="list">
-      {parts.map((btn) => {
+      {props.parts.map((btn:any) => {
         return (
-          <Part key={btn.name} amount={btn.amount} name={btn.name}/>
+          <Part key={btn.id} amount={btn.amount} name={btn.name}/>
         );
       })}
     </div>
