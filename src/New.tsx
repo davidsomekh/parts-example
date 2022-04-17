@@ -7,11 +7,12 @@ import "./App.css";
 function Newpart(props: any) {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState(1);
+  const [file,setFile] = useState('');
 
   const onUpload = () => {
     if (!validate()) return;
 
-    props.upload(name, amount, "key.pdf");
+    props.upload(name, amount, file);
     reset();
   };
 
@@ -22,6 +23,11 @@ function Newpart(props: any) {
     }
     if (amount < 1) {
       props.error("Amount should be at least 1!");
+      return false;
+    }
+
+    if (file == '') {
+      props.error("No file selected!");
       return false;
     }
 
@@ -40,6 +46,10 @@ function Newpart(props: any) {
 
   const handlAmountChange = (e: any) => {
     setAmount(e.target.value);
+  };
+
+  const handleFileChange = (e: any) => {
+    setFile(e.target.files[0].name);
   };
 
   return (
@@ -63,7 +73,7 @@ function Newpart(props: any) {
         ></input>
       </div>
       <div>
-        <input type="file" id="myfile" name="myfile"></input>
+        <input  onChange={(e) => handleFileChange(e)} type="file" id="myfile" name="myfile"></input>
       </div>
       <div onClick={onUpload} className="btn upload">
         Upload
