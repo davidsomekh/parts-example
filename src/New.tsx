@@ -1,31 +1,22 @@
-import React, {useState } from "react";
-
+import React, { useState } from "react";
 
 import "./App.css";
-import {useParts} from './Context/Parts';
-import {useError} from './Context/ErrorContext';
-import getID from './Shared/Id';
-
-
+import { useParts } from "./Context/Parts";
+import { useError } from "./Context/ErrorContext";
+import getID from "./Shared/Id";
 
 function Newpart(props: any) {
-
-  const {addParts,getParts} = useParts();
-  const {setErrorMsg} = useError();
+  const { addParts, getParts } = useParts();
+  const { setErrorMsg } = useError();
 
   const [name, setName] = useState("");
   const [amount, setAmount] = useState(1);
-  const [file,setFile] = useState('');
+  const [file, setFile] = useState("");
 
   const onUpload = () => {
     if (!validate()) return;
 
-    let part = {
-      name: name,
-      amount: amount,
-      file_name: file,
-      id:getID(7),
-    };
+    let part = { name: name, amount: amount, file_name: file, id: getID(7) };
 
     addParts(part);
     reset();
@@ -41,7 +32,7 @@ function Newpart(props: any) {
       return false;
     }
 
-    if (file === '') {
+    if (file === "") {
       setErrorMsg("No file selected!");
       return false;
     }
@@ -53,13 +44,12 @@ function Newpart(props: any) {
 
   const reset = () => {
     setErrorMsg("");
-    setName('');
+    setName("");
     setAmount(1);
-    setFile('');
+    setFile("");
     hideFileAdd();
   };
 
- 
   const handleNameChange = (e: any) => {
     setName(e.target.value);
   };
@@ -87,35 +77,47 @@ function Newpart(props: any) {
 
   return (
     <div className="new">
-            {(parts.length < 1 &&  !newPart) && "Click below to add new parts!"}
-            {!newPart && <div onClick={showFileAdd} className="btn">+ Add New   </div>}
+      {parts.length < 1 && !newPart && "Click below to add new parts!"}
+      {!newPart && (
+        <div onClick={showFileAdd} className="btn">
+          + Add New
+        </div>
+      )}
 
-      {newPart && <div className="parts_form">
-      <div>
-        {" "}
-        <input
-          value={name}
-          onChange={(e) => handleNameChange(e)}
-          placeholder="Name"
-          type="text"
-        ></input>
-      </div>
-      <div>
-        {" "}
-        <input
-          value={amount}
-          onChange={(e) => handlAmountChange(e)}
-          placeholder="Amount"
-          type="number"
-        ></input>
-      </div>
-      <div>
-        <input  onChange={(e) => handleFileChange(e)} type="file" id="myfile" name="myfile"></input>
-      </div>
-      <div onClick={onUpload} className="btn upload">  Upload</div>
-      <div onClick={reset} className="btn"> Cancel </div>
-      
-      </div>}
+      {newPart && (
+        <div className="parts_form">
+          <div>
+            <input
+              value={name}
+              onChange={(e) => handleNameChange(e)}
+              placeholder="Name"
+              type="text"
+            ></input>
+          </div>
+          <div>
+            <input
+              value={amount}
+              onChange={(e) => handlAmountChange(e)}
+              placeholder="Amount"
+              type="number"
+            ></input>
+          </div>
+          <div>
+            <input
+              onChange={(e) => handleFileChange(e)}
+              type="file"
+              id="myfile"
+              name="myfile"
+            ></input>
+          </div>
+          <div onClick={onUpload} className="btn upload">
+            Upload
+          </div>
+          <div onClick={reset} className="btn">
+            Cancel
+          </div>
+        </div>
+      )}
     </div>
   );
 }
