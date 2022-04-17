@@ -3,8 +3,17 @@ import React, { useEffect, useState } from "react";
 import logo from "./logo.svg";
 
 import "./App.css";
+import {useParts} from './Context/Parts';
+import {useError} from './Context/ErrorContext';
+import getID from './Shared/Id';
+
+
 
 function Newpart(props: any) {
+
+  const {addParts,getParts} = useParts();
+  const {setErrorMsg,getError} = useError();
+
   const [name, setName] = useState("");
   const [amount, setAmount] = useState(1);
   const [file,setFile] = useState('');
@@ -12,32 +21,43 @@ function Newpart(props: any) {
   const onUpload = () => {
     if (!validate()) return;
 
-    props.upload(name, amount, file);
+    let part = {
+      name: name,
+      amount: amount,
+      file_name: file,
+      id:getID(7),
+    };
+
+    addParts(part);
     reset();
   };
 
   const validate = () => {
     if (name == "") {
-      props.error("Please select name");
+      setErrorMsg("Please select name");
       return false;
     }
     if (amount < 1) {
-      props.error("Amount should be at least 1!");
+      setErrorMsg("Amount should be at least 1!");
       return false;
     }
 
     if (file == '') {
-      props.error("No file selected!");
+      setErrorMsg("No file selected!");
       return false;
     }
 
-    props.error("");
+    setErrorMsg("");
 
     return true;
   };
 
   const reset = () => {
-    props.close();
+    setErrorMsg("");
+    setName('');
+    setAmount(1);
+    setFile('');
+    hideFileAdd();
   };
 
  
@@ -53,8 +73,25 @@ function Newpart(props: any) {
     setFile(e.target.files[0].name);
   };
 
+  const hideFileAdd = () => {
+    setnewPart(false);
+  };
+
+  const showFileAdd = () => {
+    setnewPart(true);
+  };
+
+  const [newPart, setnewPart] = useState(false);
+  let parts: any = [];
+
+  parts = getParts();
+
   return (
     <div className="new">
+            {(parts.length < 1 &&  !newPart) && "Click below to add new parts!"}
+            {!newPart && <div onClick={showFileAdd} className="btn">+ Add New   </div>}
+
+      {newPart && <div className="parts_form">
       <div>
         {" "}
         <input
@@ -79,7 +116,7 @@ function Newpart(props: any) {
       <div onClick={onUpload} className="btn upload">  Upload</div>
       <div onClick={reset} className="btn"> Cancel </div>
       
-      
+      </div>}
     </div>
   );
 }
